@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Eventos atuais</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<!-- /.row -->
+<div class="row">
+        <div class="panel-body" ng-show="errors">
+                <div class="alert alert-danger" ng-repeat="error in errors">
+                    {$ error $}
+                </div>
+            </div>
+    <div class="col-lg-8"  ng-show="!errors.length">
+
+            
+        <div class="panel panel-default" ng-repeat="evento in eventos">
+            <div class="panel-heading">
+                <i class="fa fa-users fa-fw"></i> {$ evento.edicao $} {$ evento.tipo $} ({$ evento.ano $})
+                <div class="pull-right">
+
+                    <!-- PERMITIR PARA STAFF-->
+                    
+                    <div class="btn-group" ng-show="user.isstaff">
+                        <button type="button"  class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Ações
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li><a href="#">Adicionar deliberação</a>
+                            </li>
+                            <li><a href="#">Editar deliberações</a>
+                            </li>
+                            <li><a href="#">Remover deliberações</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                {$ evento.descricao $}
+                <a href="#!eventos/deliberacoes/{$ evento.id $}" type="button" class="btn btn-primary btn-sm btn-block">Ver deliberações</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+            </div>
+            <!-- /.col-lg-8 -->
+
+
+
+    <div class="col-lg-4"  ng-show="!errors.length">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-filter fa-fw"></i> Filtrar por temática
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    <a href="#" class="list-group-item" ng-repeat="tematica in tematicas">
+                        <i class="fa fa-tag fa-fw"></i> {$tematica.tipo$}
+                        <span class="pull-right text-muted small"><em>522</em>
+                        </span>
+                    </a>
+                    
+                </div>
+                <!-- /.list-group -->
+                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+<!-- /.row -->

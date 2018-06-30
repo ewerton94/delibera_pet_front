@@ -115,7 +115,7 @@
                         <li>
                             <a href="#"><i class="fa fa-users fa-fw"></i> Tipos de evento<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" ng-controller="get_tipos_eventos">
-                                <li ng-repeat="tipo_evento in tipos_eventos">
+                                <li ng-repeat="tipo_evento in tipos_eventos track by $index">
                                     <a href="#!eventos/tipos/{$ tipo_evento.apelido $}">{$ tipo_evento.apelido $}</a>
                                 </li>
                             </ul>

@@ -15,6 +15,10 @@ MyApp.config(['$routeProvider', '$locationProvider',
                 templateUrl : 'deliberacoes.html',
                 controller : 'DeliberacoesPorEventosCtrl'
             }).
+            when('/tematicas/deliberacoes/:tematica_id', {
+                templateUrl : 'deliberacoes_tematicas.html',
+                controller : 'DeliberacoesPorTematicaCtrl'
+            }).
             otherwise({
                 redirectTo: '/'
             });

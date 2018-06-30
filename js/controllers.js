@@ -45,6 +45,22 @@ var GetDeliberacoesPorEventos = function ($scope, $http, evento_id) {
             
         });
 }
+var GetDeliberacoesPorTematica = function ($scope, $http, tematica_id) {
+    $scope.tematica = {};
+    $http.get('http://127.0.0.1:8000/' + 'tematicas/' + tematica_id + '/deliberacoes').then(function (data) {
+            $scope.tematica = data.data;
+            console.log('http://127.0.0.1:8000/' + 'tematicas/' + tematica_id+'/deliberacoes')
+            if (!$scope.tematica.eventos.length){
+                $scope.errors.push("Sem deliberações encontradas para a temática selecionada");
+            }
+            console.log($scope.tematica);
+            
+        }, function(data) {
+            console.log("ERRO em GetDeliberacoesPorTematica");
+            $scope.errors.push(data.data.detail);           
+            
+        });
+}
 var GetEdicoes = function ($scope, $http) {
     $scope.eventos = [];
     $http.get('http://127.0.0.1:8000/' + 'eventos/edicoes' ).then(function (data) {
@@ -81,12 +97,21 @@ deliberacoesControllers.controller('EventosCtrl', ['$scope', '$http', '$location
         $scope.user = {}
         
     }]);
-
+    
 deliberacoesControllers.controller('DeliberacoesPorEventosCtrl', ['$scope', '$http', '$location','$window','$timeout', '$routeParams',
     function ($scope, $http, $location, $window, $timeout, $routeParams) {
         $scope.errors = [];
         GetTematicas($scope, $http);
         GetDeliberacoesPorEventos($scope, $http, $routeParams.evento_id);
+        $scope.user = {}
+        
+    }]);
+
+deliberacoesControllers.controller('DeliberacoesPorTematicaCtrl', ['$scope', '$http', '$location','$window','$timeout', '$routeParams',
+    function ($scope, $http, $location, $window, $timeout, $routeParams) {
+        $scope.errors = [];
+        GetTematicas($scope, $http);
+        GetDeliberacoesPorTematica($scope, $http, $routeParams.tematica_id);
         $scope.user = {}
         
     }]);

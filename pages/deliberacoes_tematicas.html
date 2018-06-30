@@ -1,12 +1,11 @@
 <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Deliberações <span ng-show="evento.subeventos.length"> - {$ evento.edicao $} {$ evento.tipo $} ({$ evento.ano $})</span> <span ng-show="tematica.deliberacoes.length" class="tooltip-demo"><button  type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="{$ tematica.descricao $}" ><i class="fa fa-user fa-fw"></i>{$ tematica.tipo $}</button></span></h1>
+            <h1 class="page-header">Deliberações <span ng-show="tematica.eventos.length" class="tooltip-demo"><button  type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="{$ tematica.descricao $}" ><i class="fa fa-tag fa-fw"></i>{$ tematica.tipo $}</button></span></h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
     <!-- /.row -->
     <!-- /.row -->
-    
     <div class="row">
             <div class="panel-body" ng-show="errors">
                     <div class="alert alert-danger" ng-repeat="error in errors">
@@ -16,9 +15,9 @@
         <div class="col-lg-8"  ng-show="!errors.length">
     
                 
-            <div class="panel panel-default" ng-repeat="sub in evento.subeventos">
+            <div class="panel panel-default" ng-repeat="evento in tematica.eventos">
                 <div class="panel-heading">
-                    <i class="fa fa-users fa-fw"></i> {$ sub.titulo $}
+                    <i class="fa fa-users fa-fw"></i> {$ evento.evento $}
                     <div class="pull-right">
     
                         <!-- PERMITIR PARA STAFF-->
@@ -41,7 +40,7 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body"><div class="list-group">
-                    <div class="list-group-item" ng-repeat="deliberacao in sub.deliberacoes">
+                    <div class="list-group-item" ng-repeat="deliberacao in evento.deliberacoes">
                         <p><b>Responsabilidade:</b></p>    
                     <div class="tooltip-demo">
                             <button ng-repeat="resp in deliberacao.responsaveis" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="top" title="{$ resp.descricao $}" ><i class="fa fa-user fa-fw"></i>{$ resp.tipo $}</button>
@@ -81,7 +80,6 @@
                     </div>
                     <!-- /.list-group -->
                     <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                    
                 </div>
                 <!-- /.panel-body -->
             </div>

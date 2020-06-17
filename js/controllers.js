@@ -1,9 +1,11 @@
 var deliberacoesControllers = angular.module('deliberacoesControllers',[]);
-var base_url = "localhost:8000";
+//var base_url = "http://localhost:8000/";
+
+var base_url = 'http://pet.ufal.br/deliberacoes/api/'
 
 var GetTematicas = function ($scope, $http) {
     $scope.tematicas = [];
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'tematicas').then(function (data) {
+    $http.get(base_url + 'tematicas').then(function (data) {
         $scope.tematicas = data.data;
         console.log($scope.tematicas);
     }, function(data) {
@@ -18,7 +20,7 @@ var GetEdicoesPorTipo = function ($scope, $http, evento_apelido) {
     if (evento_apelido.length){
         evento_id = '?tipo_evento__apelido=' + evento_apelido;
     }
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'eventos/edicoes' + evento_id).then(function (data) {
+    $http.get(base_url + 'eventos/edicoes' + evento_id).then(function (data) {
             $scope.eventos = data.data;
             if (!$scope.eventos.length){
                 $scope.errors.push("Sem edições encontradas para o tipo de evento selecionado");
@@ -33,7 +35,7 @@ var GetEdicoesPorTipo = function ($scope, $http, evento_apelido) {
 
 var GetDeliberacoesPorEventos = function ($scope, $http, evento_id) {
     $scope.evento = {};
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'eventos/deliberacoes/' + evento_id).then(function (data) {
+    $http.get(base_url + 'eventos/deliberacoes/' + evento_id).then(function (data) {
             $scope.evento = data.data;
             if (!$scope.evento.deliberacoes.length){
                 $scope.errors.push("Sem deliberações encontradas para o evento selecionado");
@@ -47,7 +49,7 @@ var GetDeliberacoesPorEventos = function ($scope, $http, evento_id) {
 }
 var GetDeliberacoesPorTematica = function ($scope, $http, tematica_id) {
     $scope.tematica = {};
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'tematicas/' + tematica_id + '/deliberacoes').then(function (data) {
+    $http.get(base_url + 'tematicas/' + tematica_id + '/deliberacoes').then(function (data) {
             $scope.tematica = data.data;
             console.log('http://pet.ufal.br/deliberacoes/api' + 'tematicas/' + tematica_id+'/deliberacoes')
             if (!$scope.tematica.eventos.length){
@@ -63,7 +65,7 @@ var GetDeliberacoesPorTematica = function ($scope, $http, tematica_id) {
 }
 var GetEdicoes = function ($scope, $http) {
     $scope.eventos = [];
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'eventos/edicoes' ).then(function (data) {
+    $http.get(base_url + 'eventos/edicoes' ).then(function (data) {
             $scope.eventos = data.data;
             
         }, function(data) {
@@ -73,7 +75,7 @@ var GetEdicoes = function ($scope, $http) {
 }
 var GetTipos = function ($scope, $http) {
     $scope.tipos_eventos = [];
-    $http.get('http://pet.ufal.br/deliberacoes/api/' + 'eventos/tipos').then(function (data) {
+    $http.get(base_url + 'eventos/tipos').then(function (data) {
             $scope.tipos_eventos = data.data;
             
         }, function(data) {
@@ -121,7 +123,7 @@ deliberacoesControllers.controller('get_tipos_eventos', ['$scope', '$http', '$lo
         
 
         $scope.tipos_eventos = [];
-        $http.get('http://pet.ufal.br/deliberacoes/api' + 'eventos/tipos').then(function (data) {
+        $http.get(base_url + 'eventos/tipos').then(function (data) {
             $scope.tipos_eventos = data.data;
             
         }, function(data) {
@@ -159,7 +161,7 @@ deliberacoesControllers.controller('EventosController', ['$scope', '$http', '$lo
         
 
         $scope.tipos_eventos = [];
-        $http.get('http://pet.ufal.br/deliberacoes/api' + 'eventos/tipos').then(function (data) {
+        $http.get(base_url + 'eventos/tipos').then(function (data) {
             $scope.tipos_eventos = data.data;
             
         }, function(data) {
